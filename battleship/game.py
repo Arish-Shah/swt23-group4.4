@@ -1,4 +1,5 @@
-from board import IS_HIT, IS_NOT_HIT, Board
+from board import Board
+from util import IS_NOT_HIT, IS_HIT
 import os
 
 class Game:
@@ -39,5 +40,7 @@ class Game:
                 over = True
             choices.append(choice)
 
+        os.system("clear")
+        self.board.draw()
         print("\nGAME OVER\n")
         print("Score:", score)
