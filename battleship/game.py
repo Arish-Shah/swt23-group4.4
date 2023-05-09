@@ -23,6 +23,5 @@ class Game:
             if choice in choices:
                 message = "You've guessed that already!"
                 continue
-            hit = self.board.bomb(choice)
-            message = "You hit a ship!" if hit else "Bomb fell in the water!"
+            _, message = self.board.bomb(choice)
             choices.append(choice)
