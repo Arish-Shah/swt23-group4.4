@@ -26,4 +26,3 @@ class Game:
             message = "Hit/Miss."
             self.board.bomb(choice)
             choices.append(choice)
-

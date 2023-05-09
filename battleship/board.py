@@ -1,10 +1,12 @@
+from ships import Ships
+
 class Board:
     # NOTE: size: [row, col]
     def __init__(self, size: tuple[int, int], ships: tuple[int, int]) -> None:
         self.size = size
-        self.ships = ships
         self.board = [["-"] * size[1] for _ in range(size[0])]
         self.alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        self.ships = Ships(ships, size)
 
     def draw(self) -> None:
         print("  ", " ".join(self.alpha[:self.size[1]]))
@@ -37,4 +39,7 @@ class Board:
 
     def bomb(self, choice: str):
         row, col = self.choice_to_indices(choice)
-        self.board[row][col] = "X"
+        if self.ships.is_hit((row, col)):
+            self.board[row][col] = "X"
+        else:
+            self.board[row][col] = "O"
