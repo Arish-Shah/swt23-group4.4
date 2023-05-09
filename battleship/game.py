@@ -36,7 +36,7 @@ class Game:
             else:
                 message = "Ship is sunk!"
                 sunked += 1
-            if sunked == 4:
+            if sunked == 5:
                 over = True
             choices.append(choice)
 
