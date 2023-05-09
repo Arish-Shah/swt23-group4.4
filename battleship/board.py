@@ -41,5 +41,7 @@ class Board:
         row, col = self.choice_to_indices(choice)
         if self.ships.is_hit((row, col)):
             self.board[row][col] = "X"
+            return True
         else:
             self.board[row][col] = "O"
+            return False
