@@ -1,0 +1,3 @@
+IS_NOT_HIT = 0
+IS_HIT = 1
+IS_SUNK = 2

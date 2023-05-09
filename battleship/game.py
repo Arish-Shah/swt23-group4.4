@@ -1,4 +1,4 @@
-from board import Board
+from board import IS_HIT, IS_NOT_HIT, Board
 import os
 
 class Game:
@@ -9,6 +9,8 @@ class Game:
         over = False
         message = "Find 5 ships."
         choices = []
+        sunked = 0
+        score = 0
 
         while not over:
             os.system("clear")
@@ -23,5 +25,19 @@ class Game:
             if choice in choices:
                 message = "You've guessed that already!"
                 continue
-            _, message = self.board.bomb(choice)
+            status = self.board.bomb(choice)
+            
+            if status == IS_NOT_HIT:
+                message = "Bomb fell in the water!"
+                score += 1
+            elif status == IS_HIT:
+                message = "You hit a ship!"
+            else:
+                message = "Ship is sunk!"
+                sunked += 1
+            if sunked == 4:
+                over = True
             choices.append(choice)
+
+        print("\nGAME OVER\n")
+        print("Score:", score)

@@ -1,4 +1,5 @@
 from ships import Ships
+from util import IS_NOT_HIT, IS_HIT, IS_SUNK
 
 class Board:
     # NOTE: size: [row, col]
@@ -37,15 +38,14 @@ class Board:
         col = self.alpha.index(col)
         return (row - 1, col)
 
-    def bomb(self, choice: str) -> tuple[bool, str]:
+    def bomb(self, choice: str) -> int:
         row, col = self.choice_to_indices(choice)
         ship = self.ships.is_hit((row, col))
         if ship is None:
             self.board[row][col] = "O"
-            return False, "Bomb fell in the water!"
+            return IS_NOT_HIT
         else:
             self.board[row][col] = "X"
-            message = "You hit a ship!"
             if self.ships.is_sunk(ship):
-                message = "Ship is sunk!"
-            return True, message
+                return IS_SUNK
+            return IS_HIT
