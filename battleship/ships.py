@@ -7,7 +7,7 @@ class Ship:
         self.hits = []
         self.sunk = False
 
-    def is_hit(self, coord: tuple[int, int]):
+    def is_hit(self, coord: tuple[int, int]) -> bool:
         if coord in self.coords:
             self.hits.append(coord)
             # say that ship sinks as soon as hit coords == coords
@@ -16,7 +16,7 @@ class Ship:
             return True
         return False
 
-    def is_sunk(self):
+    def is_sunk(self) -> bool:
         # return True just once, so user is reported as soon as it sinks
         if self.sunk:
             self.sunk = False
@@ -36,7 +36,7 @@ class Ships:
                 ship = self.get_ship()
             self.ships.append(ship)
 
-    def is_overlapping(self, new_ship: Ship):
+    def is_overlapping(self, new_ship: Ship) -> bool:
         for ship in self.ships:
             if len(set(ship.coords).intersection(new_ship.coords)) > 0:
                 return True

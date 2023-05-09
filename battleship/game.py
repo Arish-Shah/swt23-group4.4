@@ -4,7 +4,9 @@ import os
 
 class Game:
     def __init__(self) -> None:
-        self.board = Board((8, 8), (5, 4))
+        self.board_size = (8, 8)
+        self.ship_size = (5, 4)
+        self.board = Board(self.board_size, self.ship_size)
 
     def play(self) -> None:
         over = False
@@ -36,7 +38,7 @@ class Game:
             else:
                 message = "Ship is sunk!"
                 sunked += 1
-            if sunked == 5:
+            if sunked == self.ship_size[0]:
                 over = True
             choices.append(choice)
 
