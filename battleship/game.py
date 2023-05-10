@@ -1,6 +1,6 @@
-from board import Board
-from util import IS_NOT_HIT, IS_HIT
 import os
+from .board import Board
+from .util import IS_NOT_HIT, IS_HIT
 
 class Game:
     def __init__(self) -> None:

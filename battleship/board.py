@@ -1,5 +1,5 @@
-from ships import Ships
-from util import IS_NOT_HIT, IS_HIT, IS_SUNK
+from .ships import Ships
+from .util import IS_NOT_HIT, IS_HIT, IS_SUNK
 
 class Board:
     # NOTE: size: [row, col]
