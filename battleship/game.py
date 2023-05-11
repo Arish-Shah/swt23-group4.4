@@ -1,14 +1,13 @@
-import os
 from .board import Board
-from .util import IS_NOT_HIT, IS_HIT
+from .util import IS_NOT_HIT, IS_HIT, clear_screen
 
 class Game:
-    def __init__(self) -> None:
+    def __init__(self):
         self.board_size = (8, 8)
         self.ship_size = (5, 4)
         self.board = Board(self.board_size, self.ship_size)
 
-    def play(self) -> None:
+    def play(self):
         over = False
         message = "Find 5 ships."
         choices = []
@@ -16,7 +15,7 @@ class Game:
         score = 0
 
         while not over:
-            os.system("clear")
+            clear_screen()
             self.board.draw()
             
             print(f"\n{message}\n")
@@ -42,7 +41,7 @@ class Game:
                 over = True
             choices.append(choice)
 
-        os.system("clear")
+        clear_screen()
         self.board.draw()
         print("\nGAME OVER\n")
         print("Score:", score)

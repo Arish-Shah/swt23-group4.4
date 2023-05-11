@@ -3,18 +3,18 @@ from .util import IS_NOT_HIT, IS_HIT, IS_SUNK
 
 class Board:
     # NOTE: size: [row, col]
-    def __init__(self, size: tuple[int, int], ships: tuple[int, int]) -> None:
+    def __init__(self, size, ships):
         self.size = size
         self.board = [["-"] * size[1] for _ in range(size[0])]
         self.alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         self.ships = Ships(ships, size)
 
-    def draw(self) -> None:
+    def draw(self):
         print("  ", " ".join(self.alpha[:self.size[1]]))
         for i, row in enumerate(self.board):
             print("{:2d}".format(i + 1), " ".join(row))
     
-    def is_valid_choice(self, choice: str) -> bool:
+    def is_valid_choice(self, choice):
         # NOTE: might need to change if grid goes beyond 9x9
         if len(choice) != 2: return False
         
@@ -30,15 +30,15 @@ class Board:
         if not row.isdigit(): return False
         else:
             row = int(row)
-            if row < 0 or row > self.size[0]: return False
+            if row < 1 or row > self.size[0]: return False
         return True
 
-    def choice_to_indices(self, choice: str) -> tuple[int, int]:
+    def choice_to_indices(self, choice):
         col, row = choice[0].upper(), int(choice[1])
         col = self.alpha.index(col)
         return (row - 1, col)
 
-    def bomb(self, choice: str) -> int:
+    def bomb(self, choice):
         row, col = self.choice_to_indices(choice)
         ship = self.ships.is_hit((row, col))
         if ship is None:
