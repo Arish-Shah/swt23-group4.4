@@ -30,7 +30,7 @@ class Board:
         if not row.isdigit(): return False
         else:
             row = int(row)
-            if row < 0 or row > self.size[0]: return False
+            if row < 1 or row > self.size[0]: return False
         return True
 
     def choice_to_indices(self, choice):
