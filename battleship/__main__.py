@@ -1,5 +1,5 @@
 from .game import Game
 
-def main() -> None:
+def main():
     game = Game()
     game.play()

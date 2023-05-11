@@ -3,12 +3,12 @@ from .board import Board
 from .util import IS_NOT_HIT, IS_HIT
 
 class Game:
-    def __init__(self) -> None:
+    def __init__(self):
         self.board_size = (8, 8)
         self.ship_size = (5, 4)
         self.board = Board(self.board_size, self.ship_size)
 
-    def play(self) -> None:
+    def play(self):
         over = False
         message = "Find 5 ships."
         choices = []
