@@ -5,7 +5,6 @@ IS_NOT_HIT = 0
 IS_HIT = 1
 IS_SUNK = 2
 
+
 def clear_screen():
-    if platform == "linux":
-       os.system("clear") 
-    os.system("cls")
+    os.system("cls") if platform == "win32" else os.system("clear")
