@@ -1,6 +1,5 @@
-import os
 from .board import Board
-from .util import IS_NOT_HIT, IS_HIT
+from .util import IS_NOT_HIT, IS_HIT, clear_screen
 
 class Game:
     def __init__(self):
@@ -16,7 +15,7 @@ class Game:
         score = 0
 
         while not over:
-            os.system("clear")
+            clear_screen()
             self.board.draw()
             
             print(f"\n{message}\n")
@@ -42,7 +41,7 @@ class Game:
                 over = True
             choices.append(choice)
 
-        os.system("clear")
+        clear_screen()
         self.board.draw()
         print("\nGAME OVER\n")
         print("Score:", score)
