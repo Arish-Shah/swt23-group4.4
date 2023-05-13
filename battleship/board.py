@@ -1,20 +1,20 @@
-from .ships import Ships
-from .util import IS_NOT_HIT, IS_HIT, IS_SUNK
+from battleship.ships import Ships
+from battleship.utils import IS_NOT_HIT, IS_HIT, IS_SUNK
 
 class Board:
     # NOTE: size: [row, col]
-    def __init__(self, size, ships):
+    def __init__(self, size: tuple[int, int], ships: tuple[int, int]) -> None:
         self.size = size
         self.board = [["-"] * size[1] for _ in range(size[0])]
         self.alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         self.ships = Ships(ships, size)
 
-    def draw(self):
+    def draw(self) -> None:
         print("  ", " ".join(self.alpha[:self.size[1]]))
         for i, row in enumerate(self.board):
             print("{:2d}".format(i + 1), " ".join(row))
     
-    def is_valid_choice(self, choice):
+    def is_valid_choice(self, choice: str) -> bool:
         # NOTE: might need to change if grid goes beyond 9x9
         if len(choice) != 2: return False
         
@@ -33,12 +33,12 @@ class Board:
             if row < 1 or row > self.size[0]: return False
         return True
 
-    def choice_to_indices(self, choice):
+    def choice_to_indices(self, choice: str) -> tuple[int, int]:
         col, row = choice[0].upper(), int(choice[1])
         col = self.alpha.index(col)
         return (row - 1, col)
 
-    def bomb(self, choice):
+    def bomb(self, choice: str) -> int:
         row, col = self.choice_to_indices(choice)
         ship = self.ships.is_hit((row, col))
         if ship is None:
