@@ -5,11 +5,17 @@
 ### Building executable
 
 ```shell
-pyinstaller cli.py --onefile --name battleship
+pyinstaller --onefile --name battleship ./battleship/cli.py
 ```
 
-### Running the executable
+### Running executable
 
 ```shell
-./battleship
+./dist/battleship
+```
+
+### Test coverage
+
+```
+python -m pytest tests --cov=battleship --cov-report=html
 ```

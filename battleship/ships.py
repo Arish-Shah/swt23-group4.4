@@ -1,13 +1,13 @@
 from random import choice, randint
 
 class Ship:
-    def __init__(self, coords, orient):
+    def __init__(self, coords: list[tuple[int, int]], orient: str) -> None:
         self.coords = coords
         self.orient = orient
-        self.hits = []
+        self.hits: list[tuple[int, int]] = []
         self.sunk = False
 
-    def is_hit(self, coord):
+    def is_hit(self, coord: tuple[int, int]) -> bool:
         if coord in self.coords:
             self.hits.append(coord)
             # say that ship sinks as soon as hit coords == coords
@@ -16,7 +16,7 @@ class Ship:
             return True
         return False
 
-    def is_sunk(self):
+    def is_sunk(self) -> bool:
         # return True just once, so user is reported as soon as it sinks
         if self.sunk:
             self.sunk = False
@@ -25,24 +25,24 @@ class Ship:
 
 class Ships:
     # Note: ships: [count, size]
-    def __init__(self, ships, limits):
+    def __init__(self, ships: tuple[int, int], limits: tuple[int, int]) -> None:
         self.count, self.size = ships
         self.limits = limits
-        self.ships = []
+        self.ships: list[Ship] = []
         
         for _ in range(self.count):
-            ship = self.get_ship()
+            ship = self.generate_ship()
             while self.is_overlapping(ship):
-                ship = self.get_ship()
+                ship = self.generate_ship()
             self.ships.append(ship)
 
-    def is_overlapping(self, new_ship):
+    def is_overlapping(self, new_ship: Ship) -> bool:
         for ship in self.ships:
             if len(set(ship.coords).intersection(new_ship.coords)) > 0:
                 return True
         return False
 
-    def get_ship(self):
+    def generate_ship(self) -> Ship:
         orient = choice(["h", "v"])
         coords = []
         row, col = randint(0, self.limits[0] - 1), randint(0, self.limits[1] - 1)
@@ -63,11 +63,11 @@ class Ships:
 
         return Ship(coords, orient)
 
-    def is_hit(self, coord):
+    def is_hit(self, coord: tuple[int, int]) -> Ship | None:
         for ship in self.ships:
             if ship.is_hit(coord):
                 return ship
         return None
 
-    def is_sunk(self, ship):
+    def is_sunk(self, ship: Ship) -> bool:
         return ship.is_sunk()

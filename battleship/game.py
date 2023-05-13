@@ -1,16 +1,16 @@
-from .board import Board
-from .util import IS_NOT_HIT, IS_HIT, clear_screen
+from battleship.board import Board
+from battleship.utils import IS_NOT_HIT, IS_HIT, clear_screen
 
 class Game:
-    def __init__(self):
-        self.board_size = (8, 8)
-        self.ship_size = (5, 4)
+    def __init__(self, board_size=(8, 8), ship_size=(5, 4)) -> None:
+        self.board_size = board_size
+        self.ship_size = ship_size
         self.board = Board(self.board_size, self.ship_size)
 
-    def play(self):
+    def play(self, choice_input=input) -> None:
         over = False
         message = "Find 5 ships."
-        choices = []
+        choices: list[str] = []
         sunked = 0
         score = 0
 
@@ -20,7 +20,7 @@ class Game:
             
             print(f"\n{message}\n")
             
-            choice = input("Enter choice (like A3 or B4): ")
+            choice = choice_input("Enter choice (like A3 or B4): ")
             if not self.board.is_valid_choice(choice):
                 message = "Incorrect input!"
                 continue
